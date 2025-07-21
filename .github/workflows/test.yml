@@ -1,40 +1,19 @@
-name: Workflow Example
+name: Manual Run with Secret
+
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # Manual trigger only
 
 jobs:
-  build-and-test:
+  run-command:
     runs-on: ubuntu-latest
 
-    env:
-      NODE_ENV: development
-      APP_NAME: MySampleApp
-
     steps:
-      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Run tests
-      - name: Run tests
-        run: npm test
-
-      # Step 5: Use secret in a command
-      - name: Show secret usage (securely)
-        run: echo "Using secret for API: ${{ secrets.API_KEY }}"
-
-      # Step 6: Custom commands
-      - name: Custom commands
+      - name: Use a secret in the command
         run: |
-          echo "Workflow completed!"
-          echo "Environment: $NODE_ENV"
+          echo "This is a manual run."
+          echo "The secret value is: $MY_SECRET"
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET_KEY }}
