@@ -1,0 +1,22 @@
+name: Run Sample Command
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Run a simple command
+        run: echo "Hello GitHub Actions!"
+
+      - name: Run multiple commands
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "List files:"
+          ls -al
