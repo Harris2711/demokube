@@ -1,0 +1,19 @@
+name: Scheduled Workflow Example
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  scheduled-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print Current Date and Time
+        run: echo "The current UTC time is $(date -u)"
+
+      - name: Run a sample script
+        run: |
+          echo "Hello! This job runs every day at 2:00 AM UTC"
